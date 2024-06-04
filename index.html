@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Level Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://av.sc.com/sg/content/images/sg-stanchart-infographics-income-1600x490-1.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            display: flex;
+            width: 60%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .left-column, .right-column {
+            padding: 20px;
+        }
+        .left-column {
+            background-color: #f4f4f4;
+            width: 40%;
+            
+        }
+        .right-column {
+            width: 40%;
+            background-color: rgba(255, 255, 255, 0.7);
+            /* opacity: .7; */
+
+        }
+        .right-column button {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .right-column  table select{
+            /* display: block; */
+            width: 100%;
+            padding: 5px;
+            margin: 10px 0;
+            color: black;
+            
+        } 
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: auto 0 0;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-column">
+            <h2>Income Level Prediction Tool</h2>
+            <p>This tool predicts the income level for a person based on the provided information.</p>
+            <p>Fill in the details in the input fields and click the "Predict Income Level" button to get the prediction.</p>
+        </div>
+        <div class="right-column">
+            <form id="predictionForm">
+                <table border="0">
+                    <tr>
+                        <td>Locality</td>
+                        <td>
+                            <select name="locality" id="locality" required>
+                                <option value="">---</option>
+                                <option value="Rural">Rural</option>
+                                <option value="Urban">Urban</option>
+                                <option value="Semi-Urban">Semi-Urban</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>
+                            <select name="gender" id="gender" required>
+                                <option value="">---</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Marital Status</td>
+                        <td>
+                            <select name="mstatus" id="mstatus" required>
+                                <option value="">---</option>
+                                <option value="Married">Married</option>
+                                <option value="Separated">Separated</option>
+                                <option value="Single">Single</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Widowed">Widowed</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sector of work</td>
+                        <td>
+                            <select name="sector" id="sector" required>
+                                <option value="">---</option>
+                                <option value="Temporary">Temporary Employed</option>
+                                <option value="Private"> Employee</option>
+                                <option value="Government">Government Employee</option>
+                                <option value="Self-Employed">Self-Employed</option>
+                                <option value="NGO">NGO</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Occupation</td>
+                        <td>
+                            <select name="occupation" id="occupation" required>
+                                <option value="">---</option>
+                                <option value="Management">Management</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Repair">Repair</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Admin Support">Admin Support</option>
+                                <option value="Inspection">Inspection</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Cleaning">Cleaning</option>
+                                <option value="IT Support">IT Support</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Security">Security</option>
+                                <option value="Hospitality">Hospitality</option>
+                                <option value="Others">Others</option>                                
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Education level</td>
+                        <td>
+                            <select name="education" id="education" required>
+                                <option value="">---</option>
+                                <option value="Lower Primary">Lower Primary</option>
+                                <option value="Primary">Primary</option>
+                                <option value="Lower Secondary">Lower Secondary</option>
+                                <option value="A2">A2</option>
+                                <option value="A1">A1</option>
+                                <option value="A0">A0</option>
+                                <option value="Masters">Masters</option>
+                                <option value="PhD">PhD</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Age Category</td>
+                        <td>
+                            <select name="ages" id="ages" required>
+                                <option value="">---</option>
+                                <option value="Youth(18-35)">Youth(18-35)</option>
+                                <option value="Middle-Aged Adult(36-45)">Middle-Aged Adult(36-45)</option>
+                                <option value="Older Adult(46-55)">Older Adult(46-55)</option>
+                                <option value="Pre-Retirement Adult(56-65)">Pre-Retirement Adult(56-65)</option>
+                                <option value="Seniors (65+)">Seniors (65+)</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Weekly Hours</td>
+                        <td>
+                            <select name="whours" id="whours" required>
+                                <option value="">---</option>
+                                <option value="Part-Time (1-30)">Part-Time (1-30)</option>
+                                <option value="Full-Time (31-45)">Full-Time (31-45)</option>
+                                <option value="Overtime (46-55)">Overtime (46-55)</option>
+                                <option value="Extreme (56+)">Extreme (56+)</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    
+                </table>
+               
+                
+                <!-- <label for="education">Education Level</label>
+                <input type="text" id="education" name="education" required>
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" name="occupation" required>
+                <label for="hours_per_week">Hours per Week</label>
+                <input type="number" id="hours_per_week" name="hours_per_week" required>
+                <label for="marital_status">Marital Status</label>
+                <input type="text" id="marital_status" name="marital_status" required>
+                <label for="marital_status">Marital Status</label>
+                <input type="text" id="marital_status" name="marital_status" required>
+                <label for="marital_status">Marital Status</label> -->
+                <!-- <input type="text" id="marital_status" name="marital_status" required>
+                Marital Status<span>
+                <input type="text" id="marital_status" name="marital_status" required></span> -->
+                <button type="button" onclick="predictIncome()">Predict Income Level</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function predictIncome() {
+            const age = document.getElementById('ages').value;
+            const education = document.getElementById('education').value;
+            const occupation = document.getElementById('occupation').value;
+            const hours_per_week = document.getElementById('whours').value;
+            const marital_status = document.getElementById('mstatus').value;
+            const gender = document.getElementById('gender').value;
+            const locality = document.getElementById('locality').value;
+            const sector = document.getElementById('sector').value;
+
+            if(locality !='' && gender !='' && marital_status !='' && sector !='' && occupation !='' && education !='' && age !='' && hours_per_week !=''){
+                const data = {
+                locality:locality,
+                sex:gender,
+                marital_status: marital_status,
+                sector:sector,
+                occupation:occupation,
+                education_level:education,
+                age_category: age,
+                weekly_hours_category: hours_per_week
+            };
+            // alert(data['age'])
+
+
+            fetch('https://income-prediction-0dt8.onrender.com/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(`Predicted Income Level: ${result.income_category}`);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while predicting the income level.');
+            });
+            }
+            else{
+                alert("All Fields Are Required");
+
+            }
+        }
+    </script>
+</body>
+</html>
