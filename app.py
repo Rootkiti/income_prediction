@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 
-pickle_in = open('model.pkl','rb')
+pickle_in = open('refined_model.pkl','rb')
 model = pickle.load(pickle_in)
 
 app = FastAPI()
@@ -22,8 +22,6 @@ app.add_middleware(
 
 class data(BaseModel):
     locality: str
-    sex: str
-    marital_status: str
     sector: str
     occupation: str
     education_level: str
@@ -35,8 +33,6 @@ class data(BaseModel):
 def predict(features:data):
     y =pd.DataFrame([{
     'locality':features.locality,
-    'sex':features.sex,
-    'marital_status':features.marital_status,
     'sector':features.sector,
     'occupation':features.occupation,
     'education_level':features.education_level,

@@ -70,7 +70,12 @@
             <h2>Income Level Prediction Tool</h2>
             <p>This tool predicts the income level for a person based on the provided information.</p>
             <p>Fill in the details in the input fields and click the "Predict Income Level" button to get the prediction.</p>
+
+            <div id="predictions" style="font-size: 20px; margin-top: 70px; font-weight: 700;">
+                Income Level Predicted Is High
+                        </div>
         </div>
+        
         <div class="right-column">
             <form id="predictionForm">
                 <table border="0">
@@ -85,32 +90,9 @@
                             </select>
                         </td>
                     </tr>
+                 
                     <tr>
-                        <td>Gender</td>
-                        <td>
-                            <select name="gender" id="gender" required>
-                                <option value="">---</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Marital Status</td>
-                        <td>
-                            <select name="mstatus" id="mstatus" required>
-                                <option value="">---</option>
-                                <option value="Married">Married</option>
-                                <option value="Separated">Separated</option>
-                                <option value="Single">Single</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Widowed">Widowed</option>
-
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sector of work</td>
+                        <td>Employment</td>
                         <td>
                             <select name="sector" id="sector" required>
                                 <option value="">---</option>
@@ -192,21 +174,6 @@
                     
                 </table>
                
-                
-                <!-- <label for="education">Education Level</label>
-                <input type="text" id="education" name="education" required>
-                <label for="occupation">Occupation</label>
-                <input type="text" id="occupation" name="occupation" required>
-                <label for="hours_per_week">Hours per Week</label>
-                <input type="number" id="hours_per_week" name="hours_per_week" required>
-                <label for="marital_status">Marital Status</label>
-                <input type="text" id="marital_status" name="marital_status" required>
-                <label for="marital_status">Marital Status</label>
-                <input type="text" id="marital_status" name="marital_status" required>
-                <label for="marital_status">Marital Status</label> -->
-                <!-- <input type="text" id="marital_status" name="marital_status" required>
-                Marital Status<span>
-                <input type="text" id="marital_status" name="marital_status" required></span> -->
                 <button type="button" onclick="predictIncome()">Predict Income Level</button>
             </form>
         </div>
@@ -217,23 +184,19 @@
             const education = document.getElementById('education').value;
             const occupation = document.getElementById('occupation').value;
             const hours_per_week = document.getElementById('whours').value;
-            const marital_status = document.getElementById('mstatus').value;
-            const gender = document.getElementById('gender').value;
             const locality = document.getElementById('locality').value;
             const sector = document.getElementById('sector').value;
 
-            if(locality !='' && gender !='' && marital_status !='' && sector !='' && occupation !='' && education !='' && age !='' && hours_per_week !=''){
+            if(locality !=''  && sector !='' && occupation !='' && education !='' && age !='' && hours_per_week !=''){
                 const data = {
                 locality:locality,
-                sex:gender,
-                marital_status: marital_status,
                 sector:sector,
                 occupation:occupation,
                 education_level:education,
                 age_category: age,
                 weekly_hours_category: hours_per_week
             };
-            // alert(data['age'])
+            // alert(data['age']) https://income-prediction-0dt8.onrender.com/predict
 
 
             fetch('https://income-prediction-0dt8.onrender.com/predict', {
@@ -245,7 +208,7 @@
             })
             .then(response => response.json())
             .then(result => {
-                alert(`Predicted Income Level: ${result.income_category}`);
+                document.getElementById('predictions').innerHTML = `Income Level Predicted Is ${result.income_category}`;
             })
             .catch(error => {
                 console.error('Error:', error);
